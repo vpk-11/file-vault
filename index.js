@@ -20,12 +20,12 @@ app.post('/', (req,res) =>{
         let file = req.files.file;
         let filename = file.name;
         let type = file.mimetype;
-        console.log(filename);
        // file.name = 'image.png';
         console.log(filename);
         console.log(type);
 
         filename = 'image.png';
+        console.log(filename);
 
         // target_file.mv(path, callback)
         /*
