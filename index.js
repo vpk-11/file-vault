@@ -17,10 +17,6 @@ app.use(upload());
 app.get('/',(req,res) => {
     res.sendFile(__dirname + '/dfw_ost-pic.html');
 });
-/*
-app.get('/image',(req,res) => {
-    res.sendFile(__dirname + '/dfw_ost-pic2.html');
-}); */
 
 app.post('/', (req,res) =>{
     if(req.files){
@@ -31,16 +27,10 @@ app.post('/', (req,res) =>{
         console.log(filename);
        // file.name = 'image.png';
         console.log(type);
-
-        filename = 'image.png';
+        let time = new Date().getTime();
+        console.log(time);
+        filename = time + 'image.png';
         console.log(filename);
-
-        // target_file.mv(path, callback)
-        /*
-        target_file.mv(path.join(__dirname, 'uploads', filename), (err) => {
-            if (err) throw err;
-            res.send('File Uploaded');
-        })*/
 
         file.mv(path.join(__dirname, 'uploads', filename), (err) =>{
             if (err){
@@ -50,7 +40,7 @@ app.post('/', (req,res) =>{
                 app.use('/uploads', express.static(path.join(__dirname,'static')));
 
                 app.get('/images', (req,res)=>{
-                res.sendFile(path.join(__dirname,'uploads','image.png'));
+                res.sendFile(path.join(__dirname, 'uploads' , filename));
 });
             }
         });
@@ -58,7 +48,5 @@ app.post('/', (req,res) =>{
 })
 
 // file.mimetype
-
-
 
 app.listen(5000);
