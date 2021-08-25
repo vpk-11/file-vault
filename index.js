@@ -30,7 +30,7 @@ app.post("/", (req, res) => {
     console.log(type);
     let time = new Date().getTime();
     console.log(time);
-    filename = time + "image.png";
+    filename = time + filename;
     console.log(filename);
 
     file.mv(path.join(__dirname, "uploads", filename), (err) => {
@@ -52,7 +52,7 @@ app.post("/", (req, res) => {
           files.forEach(function (file) {
             // Do whatever you want to do with the file
             console.log(file);
-            app.get(`/image-${file}`, (req, res) => {
+            app.get(`/file-${file}`, (req, res) => {
                 res.sendFile(path.join(__dirname, "uploads", file));
               });
           });
