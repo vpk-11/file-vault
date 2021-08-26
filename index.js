@@ -4,6 +4,13 @@ const multer = require("multer");
 const uuid = require("uuid").v4;
 const fs = require("fs");
 
+const dir = "./uploads";
+if (!fs.existsSync(dir)) {
+  fs.mkdirSync(dir, {
+    recursive: true,
+  });
+}
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     // to select a destination
@@ -26,8 +33,8 @@ app.get("/", (req, res) => {
 });
 
 app.post("/upload", upload.single("avatar"), (req, res) => {
-  console.log(storage.filename);
-  return res.json({ status: "OK", filename: storage.filename });
+  console.log(storage.getFilename().originalname);
+  return res.json({ status: "OK"});
 });
 
 //joining path of directory
