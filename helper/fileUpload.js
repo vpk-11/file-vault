@@ -25,12 +25,12 @@ const storage = multer.diskStorage({
 // const upload = multer({dest: 'uploads/'}); this will automatically make the folder if it doesnt exist already
 const upload = multer({ storage: storage });
 
-const app = express();
-app.use(express.static("public"));
+// const app = express();
+// app.use(express.static("public"));
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "dfw_ost-pic.html"));
-});
+// app.get("/", (req, res) => {
+//   res.sendFile(path.join(__dirname, "public", "dfw_ost-pic.html"));
+// });
 
 app.post("/upload", upload.single("avatar"), (req, res) => {
   console.log(storage.getFilename().originalname);
