@@ -1,0 +1,5 @@
+*.md
+*.jpg
+*.jpeg
+*.png
+env.example
