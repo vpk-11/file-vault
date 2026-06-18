@@ -1,0 +1,1422 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "settings.json",
+      "file_type": "code",
+      "source_file": ".claude/settings.json",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 6,
+      "norm_label": "settings.json",
+      "id": "claude_settings"
+    },
+    {
+      "label": "hooks",
+      "file_type": "code",
+      "source_file": ".claude/settings.json",
+      "source_location": "L2",
+      "_origin": "ast",
+      "community": 6,
+      "norm_label": "hooks",
+      "id": "claude_settings_hooks"
+    },
+    {
+      "label": "PreToolUse",
+      "file_type": "code",
+      "source_file": ".claude/settings.json",
+      "source_location": "L3",
+      "_origin": "ast",
+      "community": 6,
+      "norm_label": "pretooluse",
+      "id": "claude_settings_hooks_pretooluse"
+    },
+    {
+      "label": "app.js",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "app.js",
+      "id": "app"
+    },
+    {
+      "label": "express",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L2",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "express",
+      "id": "app_express"
+    },
+    {
+      "label": "session",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L3",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "session",
+      "id": "app_session"
+    },
+    {
+      "label": "MongoStore",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L4",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "mongostore",
+      "id": "app_mongostore"
+    },
+    {
+      "label": "path",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L5",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "path",
+      "id": "app_path"
+    },
+    {
+      "label": "mongoose",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L6",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "mongoose",
+      "id": "app_mongoose"
+    },
+    {
+      "label": "{ PORT, MONGODB_URI, SESSION_SECRET }",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L7",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "{ port, mongodb_uri, session_secret }",
+      "id": "app_port_mongodb_uri_session_secret"
+    },
+    {
+      "label": "authRoutes",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L8",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "authroutes",
+      "id": "app_authroutes"
+    },
+    {
+      "label": "fileRoutes",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L9",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "fileroutes",
+      "id": "app_fileroutes"
+    },
+    {
+      "label": "{ errorHandler }",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L10",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "{ errorhandler }",
+      "id": "app_errorhandler"
+    },
+    {
+      "label": "app",
+      "file_type": "code",
+      "source_file": "app.js",
+      "source_location": "L12",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "app",
+      "id": "app_app"
+    },
+    {
+      "label": "env.js",
+      "file_type": "code",
+      "source_file": "config/env.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "env.js",
+      "id": "config_env"
+    },
+    {
+      "label": "required",
+      "file_type": "code",
+      "source_file": "config/env.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "required",
+      "id": "config_env_required"
+    },
+    {
+      "label": "auth.js",
+      "file_type": "code",
+      "source_file": "middleware/auth.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "auth.js",
+      "id": "middleware_auth"
+    },
+    {
+      "label": "isAuthenticated()",
+      "file_type": "code",
+      "source_file": "middleware/auth.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "isauthenticated()",
+      "id": "middleware_auth_isauthenticated"
+    },
+    {
+      "label": "errorHandler()",
+      "file_type": "code",
+      "source_file": "middleware/errorHandler.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 1,
+      "norm_label": "errorhandler()",
+      "id": "middleware_errorhandler_errorhandler"
+    },
+    {
+      "label": "userData.js",
+      "file_type": "code",
+      "source_file": "models/userData.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "userdata.js",
+      "id": "models_userdata"
+    },
+    {
+      "label": "mongoose",
+      "file_type": "code",
+      "source_file": "models/userData.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "mongoose",
+      "id": "models_userdata_mongoose"
+    },
+    {
+      "label": "fileEntrySchema",
+      "file_type": "code",
+      "source_file": "models/userData.js",
+      "source_location": "L3",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "fileentryschema",
+      "id": "models_userdata_fileentryschema"
+    },
+    {
+      "label": "userSchema",
+      "file_type": "code",
+      "source_file": "models/userData.js",
+      "source_location": "L9",
+      "_origin": "ast",
+      "community": 5,
+      "norm_label": "userschema",
+      "id": "models_userdata_userschema"
+    },
+    {
+      "label": "package.json",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "package.json",
+      "id": "package"
+    },
+    {
+      "label": "name",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L2",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "name",
+      "id": "package_name"
+    },
+    {
+      "label": "version",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L3",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "version",
+      "id": "package_version"
+    },
+    {
+      "label": "description",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L4",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "description",
+      "id": "package_description"
+    },
+    {
+      "label": "main",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L5",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "main",
+      "id": "package_main"
+    },
+    {
+      "label": "scripts",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L6",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "scripts",
+      "id": "package_scripts"
+    },
+    {
+      "label": "start",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L7",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "start",
+      "id": "package_scripts_start"
+    },
+    {
+      "label": "dev",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L8",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "dev",
+      "id": "package_scripts_dev"
+    },
+    {
+      "label": "test",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L9",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "test",
+      "id": "package_scripts_test"
+    },
+    {
+      "label": "author",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L11",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "author",
+      "id": "package_author"
+    },
+    {
+      "label": "license",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L12",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "license",
+      "id": "package_license"
+    },
+    {
+      "label": "dependencies",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L13",
+      "_origin": "ast",
+      "community": 3,
+      "norm_label": "dependencies",
+      "id": "package_dependencies"
+    },
+    {
+      "label": "bcrypt",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L14",
+      "_origin": "ast",
+      "community": 3,
+      "norm_label": "bcrypt",
+      "id": "package_dependencies_bcrypt"
+    },
+    {
+      "label": "connect-mongo",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L15",
+      "_origin": "ast",
+      "community": 3,
+      "norm_label": "connect-mongo",
+      "id": "package_dependencies_connect_mongo"
+    },
+    {
+      "label": "dotenv",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L16",
+      "_origin": "ast",
+      "community": 3,
+      "norm_label": "dotenv",
+      "id": "package_dependencies_dotenv"
+    },
+    {
+      "label": "express",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L17",
+      "_origin": "ast",
+      "community": 3,
+      "norm_label": "express",
+      "id": "package_dependencies_express"
+    },
+    {
+      "label": "express-session",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L18",
+      "_origin": "ast",
+      "community": 3,
+      "norm_label": "express-session",
+      "id": "package_dependencies_express_session"
+    },
+    {
+      "label": "mongoose",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L19",
+      "_origin": "ast",
+      "community": 3,
+      "norm_label": "mongoose",
+      "id": "package_dependencies_mongoose"
+    },
+    {
+      "label": "multer",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L20",
+      "_origin": "ast",
+      "community": 3,
+      "norm_label": "multer",
+      "id": "package_dependencies_multer"
+    },
+    {
+      "label": "uuid",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L21",
+      "_origin": "ast",
+      "community": 3,
+      "norm_label": "uuid",
+      "id": "package_dependencies_uuid"
+    },
+    {
+      "label": "devDependencies",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L23",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "devdependencies",
+      "id": "package_devdependencies"
+    },
+    {
+      "label": "nodemon",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L24",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "nodemon",
+      "id": "package_devdependencies_nodemon"
+    },
+    {
+      "label": "pnpm",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L26",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "pnpm",
+      "id": "package_pnpm"
+    },
+    {
+      "label": "onlyBuiltDependencies",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L27",
+      "_origin": "ast",
+      "community": 0,
+      "norm_label": "onlybuiltdependencies",
+      "id": "package_pnpm_onlybuiltdependencies"
+    },
+    {
+      "label": "auth.js",
+      "file_type": "code",
+      "source_file": "routes/auth.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "auth.js",
+      "id": "routes_auth"
+    },
+    {
+      "label": "express",
+      "file_type": "code",
+      "source_file": "routes/auth.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "express",
+      "id": "routes_auth_express"
+    },
+    {
+      "label": "bcrypt",
+      "file_type": "code",
+      "source_file": "routes/auth.js",
+      "source_location": "L2",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "bcrypt",
+      "id": "routes_auth_bcrypt"
+    },
+    {
+      "label": "userModel",
+      "file_type": "code",
+      "source_file": "routes/auth.js",
+      "source_location": "L3",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "usermodel",
+      "id": "routes_auth_usermodel"
+    },
+    {
+      "label": "{ isAuthenticated }",
+      "file_type": "code",
+      "source_file": "routes/auth.js",
+      "source_location": "L4",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "{ isauthenticated }",
+      "id": "routes_auth_isauthenticated"
+    },
+    {
+      "label": "router",
+      "file_type": "code",
+      "source_file": "routes/auth.js",
+      "source_location": "L6",
+      "_origin": "ast",
+      "community": 4,
+      "norm_label": "router",
+      "id": "routes_auth_router"
+    },
+    {
+      "label": "files.js",
+      "file_type": "code",
+      "source_file": "routes/files.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "files.js",
+      "id": "routes_files"
+    },
+    {
+      "label": "express",
+      "file_type": "code",
+      "source_file": "routes/files.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "express",
+      "id": "routes_files_express"
+    },
+    {
+      "label": "path",
+      "file_type": "code",
+      "source_file": "routes/files.js",
+      "source_location": "L2",
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "path",
+      "id": "routes_files_path"
+    },
+    {
+      "label": "{ diskStorage, MulterError }",
+      "file_type": "code",
+      "source_file": "routes/files.js",
+      "source_location": "L3",
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "{ diskstorage, multererror }",
+      "id": "routes_files_diskstorage_multererror"
+    },
+    {
+      "label": "multer",
+      "file_type": "code",
+      "source_file": "routes/files.js",
+      "source_location": "L4",
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "multer",
+      "id": "routes_files_multer"
+    },
+    {
+      "label": "{ v4: uuid }",
+      "file_type": "code",
+      "source_file": "routes/files.js",
+      "source_location": "L5",
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "{ v4: uuid }",
+      "id": "routes_files_v4_uuid"
+    },
+    {
+      "label": "userModel",
+      "file_type": "code",
+      "source_file": "routes/files.js",
+      "source_location": "L6",
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "usermodel",
+      "id": "routes_files_usermodel"
+    },
+    {
+      "label": "{ isAuthenticated }",
+      "file_type": "code",
+      "source_file": "routes/files.js",
+      "source_location": "L7",
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "{ isauthenticated }",
+      "id": "routes_files_isauthenticated"
+    },
+    {
+      "label": "{ MAX_FILE_SIZE_MB }",
+      "file_type": "code",
+      "source_file": "routes/files.js",
+      "source_location": "L8",
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "{ max_file_size_mb }",
+      "id": "routes_files_max_file_size_mb"
+    },
+    {
+      "label": "router",
+      "file_type": "code",
+      "source_file": "routes/files.js",
+      "source_location": "L10",
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "router",
+      "id": "routes_files_router"
+    },
+    {
+      "label": "UPLOAD_DIR",
+      "file_type": "code",
+      "source_file": "routes/files.js",
+      "source_location": "L12",
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "upload_dir",
+      "id": "routes_files_upload_dir"
+    },
+    {
+      "label": "storage",
+      "file_type": "code",
+      "source_file": "routes/files.js",
+      "source_location": "L15",
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "storage",
+      "id": "routes_files_storage"
+    },
+    {
+      "label": "upload",
+      "file_type": "code",
+      "source_file": "routes/files.js",
+      "source_location": "L23",
+      "_origin": "ast",
+      "community": 2,
+      "norm_label": "upload",
+      "id": "routes_files_upload"
+    },
+    {
+      "label": "Human Readable Name",
+      "file_type": "concept",
+      "source_file": "public/home.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 8,
+      "norm_label": "human readable name",
+      "id": "pmbs_login"
+    },
+    {
+      "label": "Human Readable Name",
+      "file_type": "concept",
+      "source_file": "uploads/3d1e4205-8c1a-4ec4-af67-2db5729828a8-hello.txt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 7,
+      "norm_label": "human readable name",
+      "id": "hello_text_3d1e4205-8c1a-4ec4-af67-2db5729828a8"
+    },
+    {
+      "label": "Human Readable Name",
+      "file_type": "concept",
+      "source_file": "uploads/8c366a01-11ad-4e33-bde1-6792e250a4e7-hello.txt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 7,
+      "norm_label": "human readable name",
+      "id": "hello_text_8c366a01-11ad-4e33-bde1-6792e250a4e7"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "claude_settings",
+      "target": "claude_settings_hooks"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "claude_settings_hooks",
+      "target": "claude_settings_hooks_pretooluse"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app",
+      "target": "app_app"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app",
+      "target": "app_authroutes"
+    },
+    {
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L10",
+      "weight": 1.0,
+      "context": "import",
+      "confidence_score": 1.0,
+      "source": "app",
+      "target": "app_errorhandler"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app",
+      "target": "app_express"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app",
+      "target": "app_fileroutes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app",
+      "target": "app_mongoose"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app",
+      "target": "app_mongostore"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app",
+      "target": "app_path"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app",
+      "target": "app_port_mongodb_uri_session_secret"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app",
+      "target": "app_session"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app",
+      "target": "config_env"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app",
+      "target": "middleware_errorhandler_errorhandler"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app",
+      "target": "routes_auth"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app.js",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app",
+      "target": "routes_files"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "middleware/errorHandler.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_errorhandler",
+      "target": "middleware_errorhandler_errorhandler"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "config/env.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "config_env",
+      "target": "config_env_required"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "routes/files.js",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_files",
+      "target": "config_env"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "middleware/auth.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "middleware_auth",
+      "target": "middleware_auth_isauthenticated"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "routes/auth.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_auth",
+      "target": "middleware_auth"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "routes/files.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_files",
+      "target": "middleware_auth"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "routes/auth.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_auth",
+      "target": "middleware_auth_isauthenticated"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "routes/files.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_files",
+      "target": "middleware_auth_isauthenticated"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "models/userData.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "models_userdata",
+      "target": "models_userdata_fileentryschema"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "models/userData.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "models_userdata",
+      "target": "models_userdata_mongoose"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "models/userData.js",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "models_userdata",
+      "target": "models_userdata_userschema"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "routes/auth.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_auth",
+      "target": "models_userdata"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "routes/files.js",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_files",
+      "target": "models_userdata"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package",
+      "target": "package_author"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package",
+      "target": "package_dependencies"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package",
+      "target": "package_description"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L23",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package",
+      "target": "package_devdependencies"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package",
+      "target": "package_license"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package",
+      "target": "package_main"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package",
+      "target": "package_name"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L26",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package",
+      "target": "package_pnpm"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package",
+      "target": "package_scripts"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package",
+      "target": "package_version"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_scripts",
+      "target": "package_scripts_dev"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_scripts",
+      "target": "package_scripts_start"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_scripts",
+      "target": "package_scripts_test"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_dependencies",
+      "target": "package_dependencies_bcrypt"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_dependencies",
+      "target": "package_dependencies_connect_mongo"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_dependencies",
+      "target": "package_dependencies_dotenv"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L17",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_dependencies",
+      "target": "package_dependencies_express"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_dependencies",
+      "target": "package_dependencies_express_session"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_dependencies",
+      "target": "package_dependencies_mongoose"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L20",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_dependencies",
+      "target": "package_dependencies_multer"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_dependencies",
+      "target": "package_dependencies_uuid"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L24",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_devdependencies",
+      "target": "package_devdependencies_nodemon"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L27",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_pnpm",
+      "target": "package_pnpm_onlybuiltdependencies"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "routes/auth.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_auth",
+      "target": "routes_auth_bcrypt"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "routes/auth.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_auth",
+      "target": "routes_auth_express"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "routes/auth.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_auth",
+      "target": "routes_auth_isauthenticated"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "routes/auth.js",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_auth",
+      "target": "routes_auth_router"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "routes/auth.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_auth",
+      "target": "routes_auth_usermodel"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "routes/files.js",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_files",
+      "target": "routes_files_diskstorage_multererror"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "routes/files.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_files",
+      "target": "routes_files_express"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "routes/files.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_files",
+      "target": "routes_files_isauthenticated"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "routes/files.js",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_files",
+      "target": "routes_files_max_file_size_mb"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "routes/files.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_files",
+      "target": "routes_files_multer"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "routes/files.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_files",
+      "target": "routes_files_path"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "routes/files.js",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_files",
+      "target": "routes_files_router"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "routes/files.js",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_files",
+      "target": "routes_files_storage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "routes/files.js",
+      "source_location": "L23",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_files",
+      "target": "routes_files_upload"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "routes/files.js",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_files",
+      "target": "routes_files_upload_dir"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "routes/files.js",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_files",
+      "target": "routes_files_usermodel"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "routes/files.js",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_files",
+      "target": "routes_files_v4_uuid"
+    },
+    {
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "source_file": "uploads/3d1e4205-8c1a-4ec4-af67-2db5729828a8-hello.txt",
+      "source_location": null,
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hello_text_3d1e4205-8c1a-4ec4-af67-2db5729828a8",
+      "target": "hello_text_8c366a01-11ad-4e33-bde1-6792e250a4e7"
+    }
+  ],
+  "hyperedges": [],
+  "built_at_commit": "ec95c32bd3b65e9c6315babc77423973df97c504"
+}

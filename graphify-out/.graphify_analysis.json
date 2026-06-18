@@ -1,0 +1,171 @@
+{
+  "communities": {
+    "0": [
+      "package",
+      "package_author",
+      "package_description",
+      "package_devdependencies",
+      "package_devdependencies_nodemon",
+      "package_license",
+      "package_main",
+      "package_name",
+      "package_pnpm",
+      "package_pnpm_onlybuiltdependencies",
+      "package_scripts",
+      "package_scripts_dev",
+      "package_scripts_start",
+      "package_scripts_test",
+      "package_version"
+    ],
+    "1": [
+      "app",
+      "app_app",
+      "app_authroutes",
+      "app_errorhandler",
+      "app_express",
+      "app_fileroutes",
+      "app_mongoose",
+      "app_mongostore",
+      "app_path",
+      "app_port_mongodb_uri_session_secret",
+      "app_session",
+      "config_env",
+      "config_env_required",
+      "middleware_errorhandler_errorhandler"
+    ],
+    "2": [
+      "routes_files",
+      "routes_files_diskstorage_multererror",
+      "routes_files_express",
+      "routes_files_isauthenticated",
+      "routes_files_max_file_size_mb",
+      "routes_files_multer",
+      "routes_files_path",
+      "routes_files_router",
+      "routes_files_storage",
+      "routes_files_upload",
+      "routes_files_upload_dir",
+      "routes_files_usermodel",
+      "routes_files_v4_uuid"
+    ],
+    "3": [
+      "package_dependencies",
+      "package_dependencies_bcrypt",
+      "package_dependencies_connect_mongo",
+      "package_dependencies_dotenv",
+      "package_dependencies_express",
+      "package_dependencies_express_session",
+      "package_dependencies_mongoose",
+      "package_dependencies_multer",
+      "package_dependencies_uuid"
+    ],
+    "4": [
+      "middleware_auth",
+      "middleware_auth_isauthenticated",
+      "routes_auth",
+      "routes_auth_bcrypt",
+      "routes_auth_express",
+      "routes_auth_isauthenticated",
+      "routes_auth_router",
+      "routes_auth_usermodel"
+    ],
+    "5": [
+      "models_userdata",
+      "models_userdata_fileentryschema",
+      "models_userdata_mongoose",
+      "models_userdata_userschema"
+    ],
+    "6": [
+      "claude_settings",
+      "claude_settings_hooks",
+      "claude_settings_hooks_pretooluse"
+    ],
+    "7": [
+      "hello_text_3d1e4205-8c1a-4ec4-af67-2db5729828a8",
+      "hello_text_8c366a01-11ad-4e33-bde1-6792e250a4e7"
+    ],
+    "8": [
+      "pmbs_login"
+    ]
+  },
+  "cohesion": {
+    "0": 0.13333333333333333,
+    "1": 0.15384615384615385,
+    "2": 0.15384615384615385,
+    "3": 0.2222222222222222,
+    "4": 0.2857142857142857,
+    "5": 0.5,
+    "6": 0.6666666666666666,
+    "7": 1.0,
+    "8": 1.0
+  },
+  "gods": [
+    {
+      "id": "package_scripts",
+      "label": "scripts",
+      "degree": 4
+    },
+    {
+      "id": "middleware_auth_isauthenticated",
+      "label": "isAuthenticated()",
+      "degree": 3
+    },
+    {
+      "id": "claude_settings_hooks",
+      "label": "hooks",
+      "degree": 2
+    },
+    {
+      "id": "app_errorhandler",
+      "label": "{ errorHandler }",
+      "degree": 2
+    },
+    {
+      "id": "middleware_errorhandler_errorhandler",
+      "label": "errorHandler()",
+      "degree": 2
+    },
+    {
+      "id": "package_pnpm",
+      "label": "pnpm",
+      "degree": 2
+    },
+    {
+      "id": "claude_settings_hooks_pretooluse",
+      "label": "PreToolUse",
+      "degree": 1
+    },
+    {
+      "id": "app_express",
+      "label": "express",
+      "degree": 1
+    },
+    {
+      "id": "app_session",
+      "label": "session",
+      "degree": 1
+    },
+    {
+      "id": "app_mongostore",
+      "label": "MongoStore",
+      "degree": 1
+    }
+  ],
+  "surprises": [
+    {
+      "source": "Human Readable Name",
+      "target": "Human Readable Name",
+      "source_files": [
+        "uploads/3d1e4205-8c1a-4ec4-af67-2db5729828a8-hello.txt",
+        "uploads/8c366a01-11ad-4e33-bde1-6792e250a4e7-hello.txt"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "shares_data_with",
+      "why": "cross-file semantic connection"
+    }
+  ],
+  "tokens": {
+    "input": 1107,
+    "output": 523
+  }
+}
