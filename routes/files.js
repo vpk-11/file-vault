@@ -9,10 +9,15 @@ const { MAX_FILE_SIZE_MB } = require('../config/env');
 
 const router = express.Router();
 
+const UPLOAD_DIR = path.resolve(__dirname, '..', 'uploads');
+
 // Swap the destination function here to change storage backend (e.g. S3, R2)
 const storage = diskStorage({
-  destination: (req, file, cb) => cb(null, 'uploads'),
-  filename: (req, file, cb) => cb(null, `${uuid()}-${file.originalname}`)
+  destination: (req, file, cb) => cb(null, UPLOAD_DIR),
+  filename: (req, file, cb) => {
+    const safeName = path.basename(file.originalname).replace(/[^A-Za-z0-9._-]/g, '_');
+    cb(null, `${uuid()}-${safeName}`);
+  }
 });
 
 const upload = multer({
@@ -53,6 +58,15 @@ router.post('/upload', isAuthenticated, upload.single('avatar'), async (req, res
 router.get('/:filename', isAuthenticated, async (req, res) => {
   const { filename } = req.params;
 
+  if (!/^[A-Za-z0-9._-]+$/.test(filename)) {
+    return res.status(400).json({ error: { code: 'BAD_FILENAME', message: 'Invalid filename' } });
+  }
+
+  const resolved = path.resolve(UPLOAD_DIR, filename);
+  if (!resolved.startsWith(UPLOAD_DIR + path.sep)) {
+    return res.status(400).json({ error: { code: 'BAD_FILENAME', message: 'Invalid filename' } });
+  }
+
   try {
     const user = await userModel.findOne({
       _id: req.session.user.id,
@@ -63,7 +77,7 @@ router.get('/:filename', isAuthenticated, async (req, res) => {
       return res.status(403).json({ error: { code: 'FORBIDDEN', message: 'Access denied' } });
     }
 
-    return res.sendFile(path.resolve('uploads', filename));
+    return res.sendFile(filename, { root: UPLOAD_DIR, dotfiles: 'deny' });
   } catch (err) {
     console.error('Download error:', err.message);
     return res.status(500).json({ error: { code: 'INTERNAL_ERROR', message: 'Download failed' } });
