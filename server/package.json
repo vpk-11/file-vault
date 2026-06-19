@@ -1,0 +1,32 @@
+{
+  "name": "file-vault-server",
+  "version": "0.2.0",
+  "description": "File vault backend",
+  "main": "dist/app.js",
+  "scripts": {
+    "start": "node dist/app.js",
+    "dev": "tsx watch src/app.ts",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "connect-mongo": "^5.1.0",
+    "dotenv": "^16.4.5",
+    "express": "^5.0.1",
+    "express-session": "^1.18.1",
+    "mongoose": "^8.5.1",
+    "multer": "^2.0.0",
+    "uuid": "^11.0.3"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/express": "^5.0.0",
+    "@types/express-session": "^1.18.0",
+    "@types/multer": "^1.4.12",
+    "@types/node": "^22.0.0",
+    "nodemon": "^3.1.4",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.0"
+  }
+}
