@@ -1,29 +1,14 @@
 {
-  "name": "file-vault",
+  "name": "file-vault-root",
   "version": "0.2.0",
-  "description": "Per-user file hosting with UUID-prefixed storage and MongoDB metadata",
-  "main": "app.js",
+  "private": true,
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "vpk-11",
-  "license": "ISC",
-  "dependencies": {
-    "bcrypt": "^5.1.1",
-    "connect-mongo": "^5.1.0",
-    "dotenv": "^16.4.5",
-    "express": "^5.0.1",
-    "express-session": "^1.18.1",
-    "mongoose": "^8.5.1",
-    "multer": "^2.0.0",
-    "uuid": "^11.0.3"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.4"
+    "dev:server": "pnpm --filter file-vault-server dev",
+    "dev:client": "pnpm --filter file-vault-client dev",
+    "build": "pnpm --filter file-vault-client build && pnpm --filter file-vault-server build",
+    "typecheck": "pnpm -r typecheck"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["bcrypt"]
+    "onlyBuiltDependencies": ["bcrypt", "esbuild"]
   }
 }

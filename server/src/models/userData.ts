@@ -1,12 +1,26 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const fileEntrySchema = new mongoose.Schema({
+interface IFileEntry {
+  storedName: string;
+  originalName: string;
+  uploadedAt: Date;
+}
+
+interface IUser {
+  uname: string;
+  pass: string;
+  age: number;
+  email: string;
+  files: IFileEntry[];
+}
+
+const fileEntrySchema = new mongoose.Schema<IFileEntry>({
   storedName: { type: String, required: true },
   originalName: { type: String, required: true },
   uploadedAt: { type: Date, default: Date.now }
 }, { _id: false });
 
-const userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema<IUser>({
   uname: { type: String, required: true, unique: true, trim: true },
   pass: { type: String, required: true },
   age: { type: Number, required: true },
@@ -14,4 +28,4 @@ const userSchema = new mongoose.Schema({
   files: [fileEntrySchema]
 }, { timestamps: true });
 
-module.exports = mongoose.model('userData', userSchema);
+export default mongoose.model<IUser>('userData', userSchema);
