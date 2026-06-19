@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import type { Request, Response } from 'express';
+import rateLimit from 'express-rate-limit';
 import bcrypt from 'bcrypt';
 import userModel from '../models/userData';
 import { isAuthenticated } from '../middleware/auth';
@@ -7,7 +8,15 @@ import { isAuthenticated } from '../middleware/auth';
 const router = Router();
 const BCRYPT_ROUNDS = 12;
 
-router.post('/signup', async (req: Request, res: Response) => {
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: { code: 'TOO_MANY_REQUESTS', message: 'Too many attempts, try again in 15 minutes' } }
+});
+
+router.post('/signup', authLimiter, async (req: Request, res: Response) => {
   const { uname, pswd, age, email } = req.body;
 
   if (!uname || !pswd || !age || !email) {
@@ -15,15 +24,27 @@ router.post('/signup', async (req: Request, res: Response) => {
     return;
   }
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    res.status(400).json({ error: { code: 'VALIDATION_FAILED', message: 'Invalid email format' } });
+    return;
+  }
+
+  if (pswd.length < 8) {
+    res.status(400).json({ error: { code: 'VALIDATION_FAILED', message: 'Password must be at least 8 characters' } });
+    return;
+  }
+
   try {
-    const existing = await userModel.findOne({ uname });
+    const existing = await userModel.findOne({ $or: [{ uname }, { email }] });
     if (existing) {
-      res.status(409).json({ error: { code: 'USER_EXISTS', message: 'Username already taken' } });
+      const field = existing.uname === uname ? 'Username' : 'Email';
+      res.status(409).json({ error: { code: 'USER_EXISTS', message: `${field} already taken` } });
       return;
     }
 
     const hashedPass = await bcrypt.hash(pswd, BCRYPT_ROUNDS);
-    await new userModel({ uname, pass: hashedPass, age: Number(age), email, files: [] }).save();
+    await new userModel({ uname, pass: hashedPass, age: Number(age), email: email.toLowerCase(), files: [] }).save();
 
     res.status(201).json({ message: 'Account created' });
   } catch (err) {
@@ -32,7 +53,7 @@ router.post('/signup', async (req: Request, res: Response) => {
   }
 });
 
-router.post('/login', async (req: Request, res: Response) => {
+router.post('/login', authLimiter, async (req: Request, res: Response) => {
   const { uname, pswd } = req.body;
 
   if (!uname || !pswd) {

@@ -3,6 +3,8 @@ import mongoose from 'mongoose';
 interface IFileEntry {
   storedName: string;
   originalName: string;
+  size: number;
+  mimeType: string;
   uploadedAt: Date;
 }
 
@@ -17,6 +19,8 @@ interface IUser {
 const fileEntrySchema = new mongoose.Schema<IFileEntry>({
   storedName: { type: String, required: true },
   originalName: { type: String, required: true },
+  size: { type: Number, required: true },
+  mimeType: { type: String, required: true },
   uploadedAt: { type: Date, default: Date.now }
 }, { _id: false });
 

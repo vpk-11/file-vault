@@ -11,8 +11,8 @@ node_modules
 /dist
 
 # uploads - keep directory, ignore contents
-uploads/*
-!uploads/.gitkeep
+server/uploads/*
+!server/uploads/.gitkeep
 
 # env
 .env

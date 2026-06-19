@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import type { Request, Response, NextFunction } from 'express';
 import path from 'path';
+import fs from 'fs/promises';
 import multer, { diskStorage, MulterError } from 'multer';
 import { v4 as uuid } from 'uuid';
 import userModel from '../models/userData';
@@ -46,9 +47,23 @@ router.post('/upload', isAuthenticated, upload.single('avatar'), async (req: Req
   try {
     await userModel.findByIdAndUpdate(
       req.session.user!.id,
-      { $push: { files: { storedName: req.file.filename, originalName: req.file.originalname } } }
+      {
+        $push: {
+          files: {
+            storedName: req.file.filename,
+            originalName: req.file.originalname,
+            size: req.file.size,
+            mimeType: req.file.mimetype
+          }
+        }
+      }
     );
-    res.status(201).json({ filename: req.file.filename, originalName: req.file.originalname });
+    res.status(201).json({
+      filename: req.file.filename,
+      originalName: req.file.originalname,
+      size: req.file.size,
+      mimeType: req.file.mimetype
+    });
   } catch (err) {
     console.error('Upload error:', (err as Error).message);
     res.status(500).json({ error: { code: 'INTERNAL_ERROR', message: 'Upload failed' } });
@@ -84,6 +99,40 @@ router.get('/:filename', isAuthenticated, async (req: Request, res: Response) =>
   } catch (err) {
     console.error('Download error:', (err as Error).message);
     res.status(500).json({ error: { code: 'INTERNAL_ERROR', message: 'Download failed' } });
+  }
+});
+
+router.delete('/:filename', isAuthenticated, async (req: Request, res: Response) => {
+  const filename = req.params['filename'] as string;
+
+  if (!/^[A-Za-z0-9._-]+$/.test(filename)) {
+    res.status(400).json({ error: { code: 'BAD_FILENAME', message: 'Invalid filename' } });
+    return;
+  }
+
+  try {
+    const user = await userModel.findOne({
+      _id: req.session.user!.id,
+      'files.storedName': filename
+    });
+
+    if (!user) {
+      res.status(403).json({ error: { code: 'FORBIDDEN', message: 'Access denied' } });
+      return;
+    }
+
+    const filePath = path.resolve(UPLOAD_DIR, filename);
+    await fs.unlink(filePath).catch(() => {});
+
+    await userModel.findByIdAndUpdate(
+      req.session.user!.id,
+      { $pull: { files: { storedName: filename } } }
+    );
+
+    res.status(204).send();
+  } catch (err) {
+    console.error('Delete error:', (err as Error).message);
+    res.status(500).json({ error: { code: 'INTERNAL_ERROR', message: 'Delete failed' } });
   }
 });
 
