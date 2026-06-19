@@ -1,222 +1,247 @@
 # PROJECT_CONTEXT
 
 ## One-Liner
-Single-process Node/Express file-hosting prototype with MongoDB-backed user records and Multer-based local disk uploads. It presents a Matrix-themed sign-up/login UI, then stores per-user uploaded filenames in MongoDB and the blobs in `uploads/`.
+File Vault is a personal file hosting service with per-user upload, download, and delete. React 19 SPA frontend, Express 5 + TypeScript API backend, MongoDB for metadata, local disk for blobs.
 
 ## Current State
-- As of: 2026-06-17
-- Confirmed in this audit: `node --check app.js` and `node --check helper/fileUpload.js` both pass, so the JavaScript parses cleanly.
-- Confirmed in code: `app.js` starts an Express server on port `8000` only after `mongoose.connect("mongodb://127.0.0.1:27017/AppDevLab_50")` succeeds.
-- Confirmed in code: `/` serves `public/home.html`, `/signup` creates `userData` documents, `/login` loads one document by `uname`, `/upload` writes files into `uploads/`, and `/home` renders `views/sophie.ejs`.
-- Not confirmed here: live MongoDB startup, login round-trip, upload round-trip, and file download round-trip.
-- Broken or incomplete:
-  - `client` is a module-global auth state in `app.js`, so the last login wins across all requests and users.
-  - `/home` renders `client.uname` and `client.files` with no null guard; a direct visit before login is likely to throw.
-  - `/login` dereferences `detail.pass` without checking for `detail === null`.
-  - `/upload` assumes `req.file` and `client` both exist.
-  - File download routes are registered once at startup from the current contents of `uploads/`; files uploaded later will not get a `/file-...` route until restart.
-  - The authorization check in the dynamic file route is wrong: `userModel.find({ files: file })` returns an array, but the code reads `detail.uname`.
-  - `helper/fileUpload.js` is an orphaned prototype and is not imported anywhere.
-- Mocked, hardcoded, or placeholder:
-  - MongoDB URI and port are hardcoded in `app.js`.
-  - `README.md` claims “secure user authentication,” but passwords are stored and compared in plaintext.
-  - `public/home.html` and `views/sophie.ejs` are demo UI, not production UX.
-- Overall readiness: local only.
+- As of: 2026-06-18
+- Confirmed: TypeScript compiles clean across both packages (`pnpm typecheck`)
+- Confirmed: pnpm workspace monorepo with server/ and client/ packages
+- Not confirmed: live end-to-end flow (requires MongoDB + .env configured)
 
-## Core Stack
+---
 
-### Frontend
-- Server-rendered HTML with EJS in `views/sophie.ejs`.
-- Static landing page in `public/home.html`.
-- CSS in `public/styles.css`.
-- No client framework, bundler, or component system.
+## Architecture
 
-### Backend
-- Node.js application entry point: `app.js`.
-- Express `4.18.2`.
-- EJS `3.1.8`.
-- Mongoose `7.0.1` with a MongoDB database at `AppDevLab_50`.
-- Multer `1.4.5-lts.1` for multipart upload handling.
-- `body-parser` `1.20.2`, though `express.json()` is also used.
-- `uuid` `9.0.0` for upload filename prefixing.
-- `mongodb` `5.1.0` is listed but not used directly in the code.
+### Monorepo Structure
+```
+/
+  server/
+    src/
+      app.ts              Entry point: helmet, session, routes, mongoose connect
+      config/env.ts       Validates required env vars on boot; exports typed constants
+      middleware/
+        auth.ts           isAuthenticated guard (checks req.session.user)
+        errorHandler.ts   Global error handler, consistent JSON shape
+      models/userData.ts  Mongoose model: users with embedded file metadata
+      routes/
+        auth.ts           POST /signup, POST /login, POST /logout, GET /me
+        files.ts          GET /, POST /upload, GET /:filename, DELETE /:filename
+      types/session.d.ts  Module augmentation: extends SessionData with user field
+    uploads/              Local blob storage (gitignored except .gitkeep)
+    tsconfig.json
+    package.json
+  client/
+    src/
+      context/AuthContext.tsx   Global auth state; checks /api/auth/me on load
+      components/
+        NavBar.tsx         Top bar: logo + user + logout
+        UploadZone.tsx     Drag-and-drop upload with click fallback
+        FileCard.tsx       File tile: icon, name, size, date, download, delete
+      pages/
+        AuthPage.tsx       Login/signup tab switcher
+        DashboardPage.tsx  File manager: upload zone + grid + empty state + skeletons
+      lib/
+        api.ts             Typed fetch wrapper for all API endpoints
+        fileUtils.ts       formatBytes, formatDate, fileIcon (by MIME type)
+      index.css            Tailwind 4 + CSS custom property token system (dark theme)
+    vite.config.ts         /api proxied to server:8000 in dev
+    tsconfig.json
+    package.json
+```
 
-### AI / LLM Layer
-- None.
+### Data Model
+`userData` collection:
+```typescript
+{
+  uname: String           // unique, trimmed
+  pass: String            // bcrypt hash, rounds=12
+  age: Number
+  email: String           // unique, lowercase, trimmed
+  files: [{
+    storedName: String    // UUID-prefixed, sanitized; actual on-disk filename
+    originalName: String  // user-visible name
+    size: Number          // bytes
+    mimeType: String      // from multer
+    uploadedAt: Date
+  }]
+  createdAt: Date         // timestamps: true
+  updatedAt: Date
+}
+```
 
-### Database & Storage
-- MongoDB database: `AppDevLab_50` on `mongodb://127.0.0.1:27017`.
-- Mongoose model: `userData` in `userData.js`.
-- Local filesystem storage: `uploads/`.
-- Checked-in sample uploads exist in `uploads/` and are part of the repo state.
+### API Surface
+| Method | Path | Auth | Description |
+|--------|------|------|-------------|
+| POST | /api/auth/signup | No | Create account; rate-limited 20/15 min |
+| POST | /api/auth/login | No | Login, set session; rate-limited 20/15 min |
+| POST | /api/auth/logout | Yes | Destroy session, clear cookie |
+| GET | /api/auth/me | Yes | Return session user |
+| GET | /api/files | Yes | List user's files |
+| POST | /api/files/upload | Yes | Upload file (multipart, field: avatar) |
+| GET | /api/files/:filename | Yes | Stream file (ownership-checked) |
+| DELETE | /api/files/:filename | Yes | Delete file from disk + metadata |
 
-### External APIs & Integrations
-- None beyond local MongoDB.
+---
 
-### Dev Tooling
-- `nodemon` `2.0.21` is present in `devDependencies`.
-- No lint config.
-- No test framework.
-- No build tool.
-- `npm test` is a placeholder that exits `1`.
+## Stack
+| Layer | Technology | Version |
+|-------|-----------|---------|
+| Runtime | Node.js | 22.x |
+| Server | Express | 5.x |
+| Language | TypeScript | 5.x (server), 6.x (client) |
+| Database | MongoDB + Mongoose | 8.x |
+| Session | express-session + connect-mongo | 1.x + 5.x |
+| Password | bcrypt | 5.x |
+| Upload | multer | 2.x |
+| Security headers | helmet | 8.x |
+| Rate limiting | express-rate-limit | 7.x |
+| Frontend | React | 19.x |
+| Bundler | Vite | 8.x |
+| Styling | Tailwind CSS | 4.x |
+| Routing | React Router | 7.x |
+| Package manager | pnpm workspaces | 10.x |
 
-### Deployment Config
-- None present.
-- No `Dockerfile`, `docker-compose`, `vercel.json`, `railway.toml`, `wrangler.toml`, or similar.
+---
 
-## Architecture Summary
-- Overall shape: single-process monolith.
-- Key files:
-  - `app.js`: Express bootstrap, Mongo connection, auth routes, upload handling, static file serving, and startup-time registration of `/file-${file}` routes for existing upload files.
-  - `userData.js`: Mongoose schema/model for user records.
-  - `public/home.html`: landing page with sign-up and login forms.
-  - `views/sophie.ejs`: logged-in upload page and file listing.
-  - `public/styles.css`: landing page styling.
-  - `helper/fileUpload.js`: older standalone upload experiment; not imported by `app.js`.
-- Data model:
-  - `userData`: `{ uname: String, pass: String, age: Number, email: String, files: [String] }`.
-  - `files` stores stored filenames, not original filenames.
-  - No schema validation, uniqueness constraint, timestamps, or indexes.
-- Notable patterns:
-  - Server-rendered UI with filesystem-backed blobs and MongoDB metadata.
-  - UUID-prefixed upload naming via Multer `diskStorage`.
-  - Ad hoc authorization through per-file routes, but the implementation is currently flawed.
+## Security: What Is In Place
+- **Passwords**: bcrypt, 12 rounds. Never stored plaintext.
+- **Session**: MongoDB-backed session store. httpOnly, sameSite: lax, secure in production.
+- **Auth guard**: isAuthenticated middleware on every protected route.
+- **Path traversal**: filename allowlist regex (`/^[A-Za-z0-9._-]+$/`) + path.resolve boundary check before serving or deleting.
+- **Filename sanitization**: path.basename + non-allowlist char replacement at upload time.
+- **Headers**: helmet — CSP, HSTS, X-Frame-Options, X-Content-Type-Options, etc.
+- **Rate limiting**: 20 requests / 15 min on /signup and /login via express-rate-limit.
+- **Input validation**: required field checks, email regex, password min-length 8 on signup.
+- **Error shape**: consistent `{ error: { code, message } }` — no stack traces to clients.
 
-## Runtime Flow
-1. Landing page
-   - `GET /` in `app.js` sends `public/home.html`.
-   - `public/home.html` posts to `/signup` and `/login`.
-2. Sign-up and login
-   - `POST /signup` reads `uname`, `pswd`, `age`, and `email` from `req.body`, calls `userModel.find({ uname })`, and inserts a new `userData` document when no match exists.
-   - `POST /login` calls `userModel.findOne({ uname: enteredUname })`, compares `detail.pass == enteredPass`, assigns the result to the module-global `client`, and redirects to `/home`.
-   - There is no password hashing, session middleware, or logout path.
-3. Upload and file access
-   - `GET /home` renders `views/sophie.ejs` with `{ client }`.
-   - `POST /upload` uses `upload.single("avatar")`, writes the file into `uploads/` with a UUID prefix, pushes the stored filename into `client.files`, saves the Mongo document, and redirects back to `/home`.
-   - At startup, `fs.readdir("./uploads", ...)` registers one `GET /file-${file}` route per file already present in `uploads/`.
-   - Those routes attempt to authorize by looking up `userModel.find({ files: file })`, but the code assumes a single document and the check is incorrect.
+---
 
-## API / Router Surface
-### Public pages
-- `GET /` -> serves `public/home.html` from `app.js`.
-- `GET /home` -> renders `views/sophie.ejs` with `client`.
+## Known Gaps and Loopholes
 
-### Auth
-- `POST /signup` -> implemented in `app.js`; creates a `userData` record if `uname` is unused.
-- `POST /login` -> implemented in `app.js`; plaintext password compare against `userData.pass`.
+### Security Gaps (blocking for production use)
 
-### Uploads
-- `POST /upload` -> implemented in `app.js`; Multer file upload and Mongo metadata update.
-- `GET /file-${file}` -> dynamically registered in `app.js` for each file discovered in `uploads/` at process start.
+1. **No CSRF protection.**
+   Session cookies with `sameSite: lax` reduce risk for same-site navigation but do not fully protect multipart uploads. A CSRF token or double-submit cookie pattern is missing.
+   Risk: medium. A malicious page could trigger a file upload from an authenticated user's browser.
 
-### Orphaned prototype surface
-- `helper/fileUpload.js` also defines:
-  - `POST /upload`
-  - `GET /file-${file}`
-  - `app.listen(3000, ...)`
-- That file is not imported by `app.js`, so those handlers are dead code unless someone runs the file directly after fixing the missing `app` declaration.
+2. **No CORS configuration.**
+   Express does not restrict allowed origins. In production, especially if the SPA is on a different domain, cross-origin requests will be unrestricted.
+   Fix: add `cors` middleware with an explicit `origin` allowlist.
 
-## Environment
-### Required
-- None are read from `process.env`.
-- Operationally required: a reachable MongoDB instance at `mongodb://127.0.0.1:27017/AppDevLab_50`; if it is absent, `app.js` will not start.
+3. **No file type allowlist or blocklist.**
+   Any file type is accepted. Malicious scripts (.sh, .bat, .js) can be uploaded and downloaded. The server does not execute them, but a phishing vector exists.
+   Fix: define an allowlist of accepted MIME types, or at minimum block executable types.
 
-### Optional
-- None.
-- All current runtime configuration is hardcoded in `app.js`.
+4. **No file content scanning.**
+   No antivirus or malware check on upload. Files are stored and served as-is.
 
-## Key Decisions
-- MongoDB is used only for user metadata; file contents live on local disk in `uploads/`.
-- Uploaded blobs are renamed with `uuid()` prefixes to avoid filename collisions.
-- Login state is stored in-process in `client` instead of sessions or JWTs.
-- File access paths are derived from stored filenames rather than signed URLs or object storage keys.
-- The app uses server-rendered EJS and static HTML instead of a client-side SPA.
+5. **cookie.secure is off in development.**
+   Correct for local dev. Must be `true` in production (NODE_ENV=production handles this). Deployer must set NODE_ENV correctly.
+
+6. **No account deletion.**
+   Users cannot delete their accounts or purge all their files. Data accumulates indefinitely.
+
+7. **No session invalidation on logout from other devices.**
+   Logout destroys the current session only. Other active sessions remain valid.
+
+8. **Email is stored but not verified.**
+   Signup accepts any string matching the regex. No confirmation email sent.
+
+### Reliability Gaps
+
+1. **No per-user storage quota.**
+   A single user can fill the disk. MAX_FILE_SIZE_MB limits per-upload size, not cumulative storage.
+
+2. **Non-atomic upload transaction.**
+   Multer writes the file to disk, then Mongoose updates the metadata. If the DB write fails, the file is orphaned on disk with no metadata reference and no cleanup mechanism.
+   Fix: write metadata first (reserved state), then write file, then mark confirmed. Or use a cron to clean orphaned files.
+
+3. **No upload deduplication.**
+   The same file uploaded twice creates two separate entries with different UUIDs.
+
+4. **No pagination on GET /api/files.**
+   Returns all files in a single response. Large file counts will cause slow queries and large payloads.
+
+5. **Local disk storage is a single point of failure.**
+   No backup, no replication. Disk failure = data loss. The Multer destination function is documented as the single swap point for cloud storage (S3, R2).
+
+6. **No file metadata index.**
+   `files` is an embedded array. Queries like `findOne({ _id, 'files.storedName': name })` do a full scan of the array for each document. Performance degrades with large file counts.
+   Fix: add a sparse index on `files.storedName` or move files to a separate collection.
+
+### Missing Features (for a complete Drive-like product)
+
+1. **No search.** Files are browsable but not searchable by name.
+2. **No folders.** Flat file list only.
+3. **No file sharing.** Files are strictly private.
+4. **No in-browser preview.** Images, PDFs, and text files download instead of previewing.
+5. **No rename.** Files cannot be renamed after upload.
+6. **No sort or filter.** Files appear in reverse upload order only.
+7. **No upload progress.** UploadZone shows "Uploading..." text with no byte-level progress bar.
+8. **No multi-file upload.** One file at a time only.
+9. **Age field on signup.** Holdover from original prototype. Unusual for a file hosting service.
+
+### Frontend Gaps
+
+1. **No route-level auth guard.**
+   DashboardPage checks auth inside useEffect and redirects, causing a render flash before redirect. A ProtectedRoute wrapper component would prevent this.
+
+2. **No optimistic delete.**
+   Card is removed only after server confirms. Should remove immediately and restore on failure.
+
+3. **AuthContext calls /api/auth/me on every SPA mount.**
+   Fine for this use case but adds a round-trip on every page load.
+
+### Infrastructure Gaps
+
+1. **No deployment config.** No Dockerfile, docker-compose, railway.toml, or Vercel config.
+2. **No CI/CD.** No GitHub Actions for typecheck, lint, or build.
+3. **No tests.** Auth, upload, download, and delete are all untested.
+4. **No structured logging.** console.error throughout. No request IDs, no log levels, no pino/winston.
+5. **No environment separation.** Single .env.example covers all environments.
+
+---
 
 ## Local Dev
+
+### Prerequisites
+- Node.js 22.x
+- pnpm 10.x
+- MongoDB on 127.0.0.1:27017
+
+### Setup
 ```bash
-npm install
-# start a local MongoDB instance that listens on 127.0.0.1:27017 first
-node app.js
+# 1. Copy env template and fill in SESSION_SECRET
+cp .env.example .env
+
+# 2. Install all workspace deps
+pnpm install
+
+# 3. If bcrypt native module is missing (first install or after node upgrade)
+pnpm --filter file-vault-server rebuild bcrypt
+
+# 4. Run server (tsx watch, hot-reload)
+pnpm dev:server
+
+# 5. Run client (Vite dev server at http://localhost:5173, proxies /api to :8000)
+pnpm dev:client
 ```
 
-Dev server with auto-reload:
+### Build
 ```bash
-npx nodemon app.js
+pnpm build
+# server/dist/   compiled JS, run with: node server/dist/app.js
+# client/dist/   Vite bundle, serve statically or from Express
 ```
 
-Test:
-```bash
-npm test
-```
-- This currently prints `Error: no test specified` and exits with status `1`.
-
-Build:
-```bash
-# no build step exists
-```
-
-## Code Quality Flags
-- Security:
-  - Passwords are stored in plaintext in `userData.pass` and compared directly in `/login`.
-  - No session, cookie, CSRF, or token-based auth exists.
-  - `client` is global process state, so one user can overwrite another user’s session context.
-  - File authorization is broken in the dynamic `/file-${file}` handler.
-  - Uploaded filenames are exposed directly via predictable route patterns.
-  - MongoDB connection string is hardcoded.
-- Reliability:
-  - `/login` can crash on unknown usernames because `detail` is not null-checked.
-  - `/home` can crash if `client` is undefined.
-  - `/upload` can crash if no file is sent or no user is logged in.
-  - Startup-time `fs.readdir()` means newly uploaded files are not routable until restart.
-  - The route handler for existing uploads uses `userModel.find()` but treats the result as a single document.
-  - `helper/fileUpload.js` uses `app` without defining it and calls `storage.getFilename()`, which is not a valid Multer API.
-- Dependency and maintenance risk:
-  - No lockfile is committed; reproducible installs are not pinned.
-  - `package-lock.json` is ignored in `.gitignore`.
-  - `mongodb` is installed but unused in the code.
-  - `body-parser` is redundant with the built-in Express JSON parser already used.
-- Structural debt:
-  - `helper/fileUpload.js` is dead prototype code.
-  - `views/sophie.ejs` duplicates some layout/CSS inline instead of using `public/styles.css`.
-  - `app.use("/public", express.static(path.join(__dirname, "static")));` points at a `static/` directory that does not exist in the tree.
-  - `app.set('views')` is a no-op as written.
-- Blocking TODOs/FIXMEs:
-  - None are explicitly marked, but the auth/session/file-download issues above are blocking for real use.
+---
 
 ## Resume / Portfolio Highlights
-- The project demonstrates a full file-upload loop: HTML form -> Multer disk write -> MongoDB metadata update -> render of user-owned filenames.
-- It uses UUID-prefixed stored filenames to avoid collisions and preserve uploads independently of the user’s original filename.
-- The code shows direct integration across Express, EJS, Mongoose, and filesystem persistence without a framework scaffold.
-- The domain is concrete rather than generic: a Matrix-themed personal file vault with per-user upload tracking.
-- The architecture decisions are visible and easy to discuss in an interview, even though the implementation needs hardening.
-
-## Gap Analysis
-### Quick wins (< 1 day each)
-- Add `npm start` and `npm run dev` scripts.
-- Replace hardcoded MongoDB URI and port with environment variables.
-- Add null checks in `/login`, `/home`, and `/upload`.
-- Delete or quarantine `helper/fileUpload.js`.
-- Stop checking sample/user uploads into `uploads/`.
-- Remove the dead `/public -> static` mount or point it at the actual static directory.
-
-### Medium lifts (1–3 days each)
-- Replace the global `client` with `express-session` or another real session mechanism.
-- Hash passwords with `bcrypt` or equivalent.
-- Add a single download route with parameterized authorization instead of startup-generated routes.
-- Add validation for username, email, age, and upload presence.
-- Add a unique index on `uname` and handle duplicate-user races.
-- Add tests for signup, login, upload, and file authorization.
-
-### Major reworks (1+ week)
-- Move blob storage out of the local filesystem into durable object storage or MongoDB GridFS.
-- Split the monolith into routes/controllers/services with explicit auth middleware.
-- Add proper deployment configuration, secret management, and observability.
-- Replace the current ad hoc authorization model with a real access-control layer.
-
-## Cleanup Notes
-- `helper/fileUpload.js` is orphaned and contains stale commented-out code.
-- `uploads/` contains checked-in fixture files, including binary image assets and text samples.
-- `views/sophie.ejs` has inline CSS that duplicates the style system in `public/styles.css`.
-- `README.md` oversells security relative to the actual plaintext-password implementation.
-- `.gitignore` ignores `package-lock.json`, which makes installs less reproducible.
-- `public/home.html` and `views/sophie.ejs` have Matrix-themed copy that looks like project-demo text rather than production content.
+- TypeScript monorepo: React 19 + Vite 8 SPA + Express 5 API in pnpm workspaces
+- Session-based auth: bcrypt (12 rounds) + MongoDB-backed session store
+- Parameterized file routes with ownership verification and path traversal protection
+- helmet + rate limiting + cookie security flags
+- Tailwind CSS 4 with CSS custom property token system (dark, Google Drive-like layout)
+- Drag-and-drop upload, loading skeletons, empty states, delete with confirmation
+- multer 2.x with UUID-prefix storage and filename sanitization at upload time

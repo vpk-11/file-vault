@@ -14,10 +14,13 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
 export interface FileEntry {
   storedName: string;
   originalName: string;
+  size: number;
+  mimeType: string;
   uploadedAt: string;
 }
 
 export interface AuthUser {
+  id: string;
   uname: string;
 }
 
@@ -53,9 +56,20 @@ export const api = {
     }).then(async res => {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error?.message || 'Upload failed');
-      return data;
+      return data as FileEntry;
     });
   },
+
+  deleteFile: (storedName: string) =>
+    fetch(`${BASE}/files/${storedName}`, {
+      method: 'DELETE',
+      credentials: 'include'
+    }).then(async res => {
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error?.message || 'Delete failed');
+      }
+    }),
 
   downloadUrl: (storedName: string) => `${BASE}/files/${storedName}`
 };

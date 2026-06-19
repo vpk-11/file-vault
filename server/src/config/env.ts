@@ -13,3 +13,4 @@ export const PORT = parseInt(process.env.PORT || '8000', 10);
 export const SESSION_SECRET = process.env.SESSION_SECRET as string;
 export const MAX_FILE_SIZE_MB = parseInt(process.env.MAX_FILE_SIZE_MB || '50', 10);
 export const UPLOAD_DIR = process.env.UPLOAD_DIR || path.resolve(process.cwd(), 'uploads');
+export const NODE_ENV = process.env.NODE_ENV || 'development';
