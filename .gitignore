@@ -36,3 +36,5 @@ graphify-out/.graphify_python
 
 # graphify-out backup dirs (dated snapshots, machine-local)
 graphify-out/2*/
+graphify-out/cache/
+
