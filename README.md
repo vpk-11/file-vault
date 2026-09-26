@@ -1,4 +1,6 @@
 # File Vault
+<!-- version: v0.2.0 -->
+![Version](https://img.shields.io/badge/version-v0.2.0-blue)
 
 File Vault is a personal file hosting service with per-user upload, download, and delete. It uses a React 19 SPA frontend, an Express 5 + TypeScript API backend, MongoDB for metadata, and local disk for file storage.
 
@@ -48,3 +50,6 @@ pnpm build
 - UUID-prefixed file storage with filename sanitization
 - Local disk storage with a clear swap point for cloud storage later
 - React dashboard with drag-and-drop upload and file cards
+
+## Changelog
+
