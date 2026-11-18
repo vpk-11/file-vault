@@ -1,6 +1,6 @@
 {
   "name": "file-vault-server",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "File vault backend",
   "main": "dist/app.js",
   "scripts": {
