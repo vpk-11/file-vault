@@ -1,6 +1,6 @@
 {
   "name": "file-vault-root",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "private": true,
   "scripts": {
     "dev:server": "pnpm --filter file-vault-server dev",
